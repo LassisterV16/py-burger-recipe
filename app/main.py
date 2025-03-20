@@ -13,7 +13,7 @@ class Validator(ABC):
         setattr(instance, self.protected_name, value)
 
     @abstractmethod
-    def validate(self, value: int) -> None:
+    def validate(self, value: int | str) -> None:
         pass
 
 
@@ -35,7 +35,7 @@ class OneOf(Validator):
     def __init__(self, options: tuple) -> None:
         self.options = options
 
-    def validate(self, value: int) -> None:
+    def validate(self, value: str) -> None:
         if value not in self.options:
             raise ValueError(f"Expected {value} to be one of {self.options}.")
 
